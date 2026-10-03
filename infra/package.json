@@ -1,0 +1,23 @@
+{
+  "name": "water-temperature-lambda-infra",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CDK: water-temperature-lambda (HTTP API + Lambda, Node.js 22)",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "synth": "cdk synth",
+    "diff": "cdk diff",
+    "deploy": "cdk deploy",
+    "destroy": "cdk destroy"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "aws-cdk": "^2.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "water-temperature-lambda",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tampereen seudun pintaveden lämpötila (SYKE Hydrologiarajapinta) — AWS Lambda (Node.js 22, riippuvuudeton)",
+  "type": "module",
+  "main": "index.mjs",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node test/smoke.mjs",
+    "live": "node test/live.mjs",
+    "infra:install": "npm --prefix infra install",
+    "synth": "npm --prefix infra run synth",
+    "diff": "npm --prefix infra run diff",
+    "deploy": "npm --prefix infra run deploy",
+    "destroy": "npm --prefix infra run destroy",
+    "synth:prod": "npm --prefix infra run synth -- -c env=prod",
+    "diff:prod": "npm --prefix infra run diff -- -c env=prod",
+    "deploy:prod": "npm --prefix infra run deploy -- -c env=prod",
+    "destroy:prod": "npm --prefix infra run destroy -- -c env=prod"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}
