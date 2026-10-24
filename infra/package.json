@@ -2,7 +2,7 @@
   "name": "water-temperature-lambda-infra",
   "version": "0.1.0",
   "private": true,
-  "description": "CDK: water-temperature-lambda (HTTP API + Lambda, Node.js 22)",
+  "description": "CDK: water-temperature-lambda (HTTP API + Lambda, Node.js 24)",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "synth": "cdk synth",

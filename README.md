@@ -16,7 +16,7 @@ Selain / asiakas
 API Gateway HTTP API
    │
    ▼
-Lambda (Node.js 22, riippuvuudeton)  ── muistivälimuisti 5 min ──┐
+Lambda (Node.js 24, riippuvuudeton)  ── muistivälimuisti 5 min ──┐
    │                                                            │
    ▼  (välimuistin ohittaen ~1 kutsu / 5 min / lämmin kontti)   │
 SYKE Hydrologiarajapinta (OData 3.0, CC BY 4.0, ei API-avainta) ┘
@@ -111,12 +111,18 @@ Kaikilla on käyttökelpoinen oletus, joten funktio toimii ilman konfigurointia.
 
 ## Paikallinen ajo ja testit
 
-Vaatii **Node.js ≥ 22.23.4** (funktio käyttää natiivia `fetch`iä). Versio on
+Vaatii **Node.js ≥ 24.22.1** (funktio käyttää natiivia `fetch`iä). Versio on
 lukittu `.nvmrc`:hen → `nvm use`. Alaraja johtuu Node.js:n Brotli-dekooderin
-haavoittuvuudesta (CVE-2026-111497, "Node2Shell"), joka on korjattu versiossa
-22.23.4: `fetch` purkaa `content-encoding: br` -vastaukset automaattisesti,
-joten vanhempi Node on altis. Lambdan ajoaikana on `nodejs22.x`, jonka AWS
-päivittää automaattisesti (runtime update -tila `Auto`).
+haavoittuvuudesta (CVE-2026-111497, "Node2Shell"), joka on korjattu versioissa
+22.23.4 / 24.22.1 / 26.12.1: `fetch` purkaa `content-encoding: br` -vastaukset
+automaattisesti, joten vanhempi Node on altis.
+
+Lambdan ajoaikana on `nodejs24.x`, jonka AWS päivittää automaattisesti (runtime
+update -tila `Auto`). **Huom (24.10.2026):** AWS:n `nodejs24.x`-runtime sisälsi
+vielä Noden 24.21.0 eli oli CVE-2026-111497:n osalta altis, toisin kuin
+`nodejs22.x` (22.23.4). Kun AWS julkaisee korjatun 24-runtimen, funktio saa sen
+automaattisesti (`Auto`) tai viimeistään seuraavassa deploy'ssa; käytössä olevan
+runtime-version näkee lokeista (`INIT_START Runtime Version`).
 
 ```bash
 npm test     # savutesti: mockattu fetch, ei verkkoyhteyttä
@@ -199,7 +205,7 @@ npm run destroy:prod     # tai: cd infra && npx cdk destroy -c env=prod
 
 Stack luo seuraavat resurssit:
 
-- **Lambda** `water-temperature-<env>` — Node.js 22, 256 Mt, timeout 10 s,
+- **Lambda** `water-temperature-<env>` — Node.js 24, 256 Mt, timeout 10 s,
   varattu concurrency 2.
 - **API Gateway HTTP API** — reitti `GET /v1/water/temperature`,
   CORS-esitarkistus sallittu (GET), stagen throttlaus (rate 20/s, burst 40).

@@ -3,7 +3,7 @@
  *
  * Tampereen seudun pintaveden lämpötila (SYKE Hydrologiarajapinta).
  *
- * Toteutus on tarkoituksella **riippuvuudeton** (ei npm-paketteja): Node.js 22
+ * Toteutus on tarkoituksella **riippuvuudeton** (ei npm-paketteja): Node.js 24
  * sisältää `fetch`in ja `AbortSignal.timeout`in, ja jäsennelty lokitus sekä
  * korrelaatio-ID on toteutettu inline (ei ulkoisia kirjastoja).
  *

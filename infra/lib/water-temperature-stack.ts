@@ -5,7 +5,7 @@
  *   API Gateway HTTP API (kevyempi kuin REST API)
  *     GET /v1/water/temperature → Lambda → SYKE Hydrologiarajapinta → JSON
  *
- * Lambda on Node.js 22 ja riippuvuudeton (ks. ../index.mjs). Bundlaus tehdään
+ * Lambda on Node.js 24 ja riippuvuudeton (ks. ../index.mjs). Bundlaus tehdään
  * esbuildillä (NodejsFunction). Ei DynamoDB-, SSM- eikä Secrets Manager
  * -käyttöä (SYKE-rajapinta ei vaadi avainta).
  *
@@ -80,7 +80,7 @@ export class WaterTemperatureStack extends cdk.Stack {
         handler: 'handler',
         functionName: `water-temperature-${envName}`,
         description: 'Tampereen seudun pintaveden lämpötila (SYKE Hydrologiarajapinta)',
-        runtime: lambda.Runtime.NODEJS_22_X,
+        runtime: lambda.Runtime.NODEJS_24_X,
         memorySize: 256,
         // Yksi pieni OData-kutsu ehtii hyvin 10 sekunnissa.
         timeout: cdk.Duration.seconds(10),
@@ -93,7 +93,7 @@ export class WaterTemperatureStack extends cdk.Stack {
         depsLockFilePath: path.join(__dirname, '../../package-lock.json'),
         bundling: {
           format: nodejs.OutputFormat.ESM,
-          target: 'node22',
+          target: 'node24',
           mainFields: ['module', 'main'],
           minify: true,
           sourceMap: false,
