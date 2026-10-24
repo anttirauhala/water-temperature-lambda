@@ -37,6 +37,7 @@ SYKE Hydrologiarajapinta (OData 3.0, CC BY 4.0, ei API-avainta) ┘
 
 ```
 .
+├── .nvmrc             # kehityksen Node-versio (`nvm use`)
 ├── index.mjs          # Lambda-handler (koko logiikka; ei riippuvuuksia)
 ├── package.json       # paikallinen ajo, testit ja CDK-komennot (devDep: esbuild)
 ├── test/
@@ -110,7 +111,12 @@ Kaikilla on käyttökelpoinen oletus, joten funktio toimii ilman konfigurointia.
 
 ## Paikallinen ajo ja testit
 
-Vaatii Node.js ≥ 22 (funktio käyttää natiivia `fetch`iä).
+Vaatii **Node.js ≥ 22.23.4** (funktio käyttää natiivia `fetch`iä). Versio on
+lukittu `.nvmrc`:hen → `nvm use`. Alaraja johtuu Node.js:n Brotli-dekooderin
+haavoittuvuudesta (CVE-2026-111497, "Node2Shell"), joka on korjattu versiossa
+22.23.4: `fetch` purkaa `content-encoding: br` -vastaukset automaattisesti,
+joten vanhempi Node on altis. Lambdan ajoaikana on `nodejs22.x`, jonka AWS
+päivittää automaattisesti (runtime update -tila `Auto`).
 
 ```bash
 npm test     # savutesti: mockattu fetch, ei verkkoyhteyttä

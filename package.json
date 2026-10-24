@@ -7,7 +7,7 @@
   "main": "index.mjs",
   "license": "MIT",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "test": "node test/smoke.mjs",
